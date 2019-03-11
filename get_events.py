@@ -45,7 +45,7 @@ def argument_parsing():
     parser.add_argument("--dir",
                         type=str,
                         help="The directory to watch.",
-                        default=os.path.dirname(os.path.realpath(__file__)))
+                        default="./")
 
     parser.add_argument("--lib",
                         type=str,
