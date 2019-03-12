@@ -16,8 +16,6 @@
 # Authors:
 #     Manuela Kuhn <manuela.kuhn@desy.de>
 #
-
-
 """
 This module freezes the hidra tools to be able to run in on systems without
 installing the dependencies.
@@ -27,35 +25,10 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import platform
-import zmq
-
 from cx_Freeze import setup, Executable
 
-if platform.system() == "Windows":
-    PLATFORM_SPECIFIC_PACKAGES = ["watchdog"]
-else:
-    PLATFORM_SPECIFIC_PACKAGES = ["inotifyx"]
-
-# Dependencies are automatically detected, but it might need fine tuning.
-BUILD_EXE_OPTIONS = {
-    "packages": (
-        [
-            "zmq",
-        ]
-        + PLATFORM_SPECIFIC_PACKAGES
-    ),
-    "include_files": [
-        ("get_events.py", "get_events.py"),
-    ]
-}
-
-EXECUTABLES = [
-    Executable("get_events.py")
-]
 
 setup(name='HiDRA-tools',
       version='0.0.0',
       description='',
-      options={"build_exe": BUILD_EXE_OPTIONS},
-      executables=EXECUTABLES)
+      executables=[Executable("get_events.py")])
